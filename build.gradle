@@ -1,4 +1,6 @@
 plugins {
+    // Gradle Shadow plugin - para gradle 4.X
+    id 'com.github.johnrengelman.shadow' version '4.0.0' // troque para 5.0.0 se estiver com gradle 5.x
     id 'java'
 }
 
@@ -11,6 +13,14 @@ repositories {
     mavenCentral()
 }
 
+// Indicando qual é a classe que possui método main e que deverá ser executada
+// quando a aplicação estiver empacotada em um arquivo .jar
+jar {
+    manifest {
+        attributes 'Main-Class': 'poo.Principal'
+    }
+}
+
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
@@ -19,4 +29,7 @@ dependencies {
 
     // https://mvnrepository.com/artifact/com.google.zxing/javase
     compile group: 'com.google.zxing', name: 'javase', version: '3.4.0'
+
+    // importando arquivo JAR que está dentro do diretório lib
+    compile files('lib/barcode.jar')
 }
