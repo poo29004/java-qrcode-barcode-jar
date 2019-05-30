@@ -155,3 +155,6 @@ Temporary Items
 
 # Não ignore os arquivos JAR contidos dentro do diretório lib
 !lib/*.jar
+
+# Não ignore os arquivos JAR contidos dentro do diretório gradle
+!gradle/wrapper/*.jar
