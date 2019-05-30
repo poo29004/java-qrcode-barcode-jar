@@ -9,6 +9,7 @@ import com.google.zxing.qrcode.QRCodeWriter;
 
 import java.io.IOException;
 import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 /**
@@ -24,8 +25,11 @@ public class Principal {
      * @param nomeDoArquivo - nome do arquivo que irá conter a imagem gerada
      */
     public boolean gerar(String tipo, String valor, String nomeDoArquivo) {
-        if (nomeDoArquivo.length() == 0){
+        if ((nomeDoArquivo == null)||(tipo == null)||(valor == null)){
            return false;
+        }
+        if(nomeDoArquivo.length() == 0){
+            return false;
         }
         try {
             switch (tipo) {
@@ -35,19 +39,16 @@ public class Principal {
                     CodigoDeBarra.gerarCodigoDeBarra(valorInt, nomeDoArquivo);
                     return true;
                 case "qrcode":
-                    Path path = FileSystems.getDefault().getPath(nomeDoArquivo);
-
+                    Path filePath = FileSystems.getDefault().getPath(nomeDoArquivo);
                     QRCodeWriter qrCodeWriter = new QRCodeWriter();
                     BitMatrix bitMatrix = qrCodeWriter.encode(valor, BarcodeFormat.QR_CODE, 300, 300);
-                    MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
+                    MatrixToImageWriter.writeToPath(bitMatrix, "PNG", filePath);
                     return true;
-                default:
-                    return false;
             }
         } catch (NumberFormatException e) {
             System.err.println("Erro na conversão para inteiro. Garanta que o 2o argumento seja um número inteiro");
         } catch (WriterException | IOException e) {
-            System.err.println("Não foi possível gerar QRCode com o argumento fornecido. Erro: " + e.toString());
+            System.err.println("Não foi possível gerar arquivo com o argumento fornecido. Erro: " + e.toString());
         } catch (Exception e) {
             System.err.println("Algo deu errado. " + e.toString());
         }

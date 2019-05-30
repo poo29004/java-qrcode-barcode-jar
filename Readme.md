@@ -1,3 +1,5 @@
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![Build Status](https://travis-ci.org/poo29004/java-qrcode-barcode-jar.svg?branch=master)](https://travis-ci.org/poo29004/java-qrcode-barcode-jar)
+
 # Como gerar arquivo `.jar` executável
 
 O principal objetivo desse repositório consiste em demonstrar como gerar uma aplicação Java empacotada, com todas as bibliotecas que depende, em um arquivo `.jar`. Em suma, só é necessário fazer uso do [Gradle Shadow plugin](https://imperceptiblethoughts.com/shadow/) e indicar qual é a classe com método `main` que deverá ser executada. Tudo isso é feito no arquivo [`build.gradle`](build.gradle).
@@ -19,7 +21,7 @@ O arquivo `poo-1.0-all.jar` será gerado dentro do diretório `build/libs`.
 Essa aplicação exemplo gera códigos de barra e QRCode em arquivos `.png`. A aplicação, quando empacotada em um arquivo `.jar` executável, poderá ser executada no terminal da seguinte maneira:
 
 ```shell
-java -jar poo-1.0-all.jar barcode 123456 a.png
+java -jar poo-1.0-all.jar barcode 123456 imagem.png
 
 # ou
 
