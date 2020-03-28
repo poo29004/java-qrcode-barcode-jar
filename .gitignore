@@ -154,7 +154,7 @@ Temporary Items
 # End of https://www.gitignore.io/api/java,linux,macos,intellij
 
 # Não ignore os arquivos JAR contidos dentro do diretório lib
-!lib/*.jar
+!libs/*.jar
 
 # Não ignore os arquivos JAR contidos dentro do diretório gradle
 !gradle/wrapper/*.jar

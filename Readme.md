@@ -2,7 +2,7 @@
 
 # Como gerar arquivo `.jar` executável
 
-O principal objetivo desse repositório consiste em demonstrar como gerar uma aplicação Java empacotada, com todas as bibliotecas que depende, em um arquivo `.jar`. Em suma, só é necessário fazer uso do [Gradle Shadow plugin](https://imperceptiblethoughts.com/shadow/) e indicar qual é a classe com método `main` que deverá ser executada. Tudo isso é feito no arquivo [`build.gradle`](build.gradle).
+O principal objetivo desse repositório consiste em demonstrar como gerar uma aplicação Java empacotada, com todas as bibliotecas que depende, em um único arquivo `.jar`. Em suma, é necessário fazer uso do [Gradle Shadow plugin](https://imperceptiblethoughts.com/shadow/) e indicar qual é a classe com método `main` que deverá ser executada. Tudo isso é feito no arquivo [`build.gradle`](build.gradle).
 
 ## Gerando arquivo `.jar`
 
@@ -12,7 +12,7 @@ Para gerar um arquivo `. jar` executável desse projeto basta executar a tarefa 
 gradle shadowJar
 ```
 
-O arquivo `poo-1.0-all.jar` será gerado dentro do diretório `build/libs`.
+O arquivo `gerador-codigos-1.0-all.jar` será gerado dentro do diretório `build/libs`.
 
 
 
@@ -21,23 +21,23 @@ O arquivo `poo-1.0-all.jar` será gerado dentro do diretório `build/libs`.
 Essa aplicação exemplo gera códigos de barra e QRCode em arquivos `.png`. A aplicação, quando empacotada em um arquivo `.jar` executável, poderá ser executada no terminal da seguinte maneira:
 
 ```shell
-java -jar poo-1.0-all.jar barcode 123456 imagem.png
+java -jar gerador-codigos-1.0-all.jar barcode 123456 imagem.png
 
 # ou
 
-java -jar poo-1.0-all.jar qrcode 'http://www.sj.ifsc.edu.br' imagem.png
+java -jar gerador-codigos-1.0-all.jar qrcode 'http://www.sj.ifsc.edu.br' imagem.png
 ```
 
 
 
 ### Adicionando um arquivo JAR (biblioteca)
 
-Nesse projeto foi criado um diretório `lib` para armazenar o arquivo `.jar` da biblioteca [barcode](lib/barcode.jar).
+Nesse projeto foi criado um diretório `libs` para armazenar o arquivo `.jar` da biblioteca [barcode](libs/barcode.jar).
 
-Foi necessário modificar o arquivo [`.gitignore`](.gitignore) de forma a garantir que os arquivos `.jar` dentro do diretório `lib` não sejam ignorados. Sendo assim, foi incluída a linha abaixo no final do arquivo [`.gitignore`](.gitignore).   
+Foi necessário modificar o arquivo [`.gitignore`](.gitignore) de forma a garantir que os arquivos `.jar` dentro do diretório `libs` não sejam ignorados. Sendo assim, foi incluída a linha abaixo no final do arquivo [`.gitignore`](.gitignore).   
 
 ```
-!lib/*.jar
+!libs/*.jar
 ```
 
  E no arquivo [`build.gradle`](build.gradle) foi incluída uma linha na seção de dependências. 
@@ -46,7 +46,7 @@ Foi necessário modificar o arquivo [`.gitignore`](.gitignore) de forma a garant
 dependencies {
     
     // importando arquivo JAR que está dentro do diretório lib
-    compile files('lib/barcode.jar')
+    implementation files('libs/barcode.jar')
 }
 ```
 
@@ -54,16 +54,16 @@ dependencies {
 
 ### Adicionando biblioteca via dependência do `build.gradle`
 
-Para gerar QRCode foi feito uso das bibliotecas [Google ZXing Core](https://mvnrepository.com/artifact/com.google.zxing) e [Google ZXing Java SE Extensions](https://mvnrepository.com/artifact/com.google.zxing/javase). As respectivas linhas foram incluídas no arquivo [`build.gradle`](build.gradle).
+Para gerar QRCode foi feito uso das bibliotecas [Google ZXing Core](https://bintray.com/bintray/jcenter/com.google.zxing%3Acore) e [Google ZXing Java SE Extensions](https://bintray.com/bintray/jcenter/com.google.zxing%3Ajavase). As respectivas linhas foram incluídas no arquivo [`build.gradle`](build.gradle).
 
 ```groovy
 dependencies {
 
-    // https://mvnrepository.com/artifact/com.google.zxing/core
-    compile group: 'com.google.zxing', name: 'core', version: '3.4.0'
+    // https://bintray.com/bintray/jcenter/com.google.zxing%3Acore
+    implementation 'com.google.zxing:core:3.4.0'
 
-    // https://mvnrepository.com/artifact/com.google.zxing/javase
-    compile group: 'com.google.zxing', name: 'javase', version: '3.4.0'
+    // https://bintray.com/bintray/jcenter/com.google.zxing%3Ajavase
+    implementation 'com.google.zxing:javase:3.4.0'
 }
 ```
 

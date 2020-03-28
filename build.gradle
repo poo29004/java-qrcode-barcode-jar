@@ -1,6 +1,5 @@
 plugins {
-    // Gradle Shadow plugin - para gradle 4.X
-    id 'com.github.johnrengelman.shadow' version '4.0.0' // troque para 5.0.0 se estiver com gradle 5.x
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
     id 'java'
 }
 
@@ -22,14 +21,14 @@ jar {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testImplementation 'junit:junit:4.12'
 
-    // https://mvnrepository.com/artifact/com.google.zxing/core
-    compile group: 'com.google.zxing', name: 'core', version: '3.4.0'
+    // https://bintray.com/bintray/jcenter/com.google.zxing%3Acore
+    implementation 'com.google.zxing:core:3.4.0'
 
-    // https://mvnrepository.com/artifact/com.google.zxing/javase
-    compile group: 'com.google.zxing', name: 'javase', version: '3.4.0'
+    // https://bintray.com/bintray/jcenter/com.google.zxing%3Ajavase
+    implementation 'com.google.zxing:javase:3.4.0'
 
-    // importando arquivo JAR que está dentro do diretório lib
-    compile files('lib/barcode.jar')
+    // importando arquivo JAR que está dentro do diretório libs
+    implementation files('libs/barcode.jar')
 }
