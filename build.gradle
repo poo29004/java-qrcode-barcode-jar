@@ -1,33 +1,28 @@
 plugins {
-    id 'com.github.johnrengelman.shadow' version '5.2.0'
+    id 'application'
     id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
-
-group 'engtelecom'
-version '1.0'
-
-sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
 }
 
-// Indicando qual é a classe que possui método main e que deverá ser executada
-// quando a aplicação estiver empacotada em um arquivo .jar
-jar {
-    manifest {
-        attributes 'Main-Class': 'poo.Principal'
-    }
+application{
+	// informar o nome do pacote e classe Java que tem o método main
+	mainClass = 'poo.Principal'
 }
 
+
 dependencies {
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+	implementation 'com.google.guava:guava:30.1.1-jre'
 
     // https://bintray.com/bintray/jcenter/com.google.zxing%3Acore
-    implementation 'com.google.zxing:core:3.4.0'
+    implementation 'com.google.zxing:core:3.4.1'
 
     // https://bintray.com/bintray/jcenter/com.google.zxing%3Ajavase
-    implementation 'com.google.zxing:javase:3.4.0'
+    implementation 'com.google.zxing:javase:3.4.1'
 
     // importando arquivo JAR que está dentro do diretório libs
     implementation files('libs/barcode.jar')
