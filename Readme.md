@@ -1,4 +1,4 @@
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![Build Status](https://travis-ci.org/poo29004/java-qrcode-barcode-jar.svg?branch=master)](https://travis-ci.org/poo29004/java-qrcode-barcode-jar)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 # Como gerar arquivo `.jar` executável
 
@@ -58,12 +58,9 @@ Para gerar QRCode foi feito uso das bibliotecas [Google ZXing Core](https://bint
 
 ```groovy
 dependencies {
+    implementation 'com.google.zxing:core:3.4.1'
 
-    // https://bintray.com/bintray/jcenter/com.google.zxing%3Acore
-    implementation 'com.google.zxing:core:3.4.0'
-
-    // https://bintray.com/bintray/jcenter/com.google.zxing%3Ajavase
-    implementation 'com.google.zxing:javase:3.4.0'
+    implementation 'com.google.zxing:javase:3.4.1'
 }
 ```
 
@@ -71,21 +68,21 @@ dependencies {
 
 ### Gradle Shadow plugin
 
-Foi feito uso do [Gradle Shadow plugin](https://imperceptiblethoughts.com/shadow/) para empacotar toda a aplicação Java,  junto com suas dependências, dentro de um arquivo `.jar`. É necessário indicar qual o nome da classe principal, aquela com o método `public static void main(String[] args)`, pois é essa que será executada. 
+Foi feito uso do [Gradle Shadow plugin](https://imperceptiblethoughts.com/shadow/) para empacotar toda a aplicação Java,  junto com suas dependências, dentro de um arquivo `.jar`. É necessário indicar qual o nome da classe principal, aquela com o método `public static void main(String[] args)`, pois é essa que será executada. Neste exemplo também foi feito uso do plugin gradle `application`.
 
 Nesse projeto, tal classe é `poo.Principal`.  Sendo assim, foi necessário incluir as seguintes linhas no  arquivo [`build.gradle`](build.gradle). 
 
 ```groovy
 plugins {
+    id 'application'
     // Gradle Shadow plugin
-    id 'com.github.johnrengelman.shadow' version '4.0.0'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
     id 'java'
 }
 
-jar {
-    manifest {
-        attributes 'Main-Class': 'poo.Principal'
-    }
+application{
+	// informar o nome do pacote e classe Java que tem o método main
+	mainClass = 'poo.Principal'
 }
 ```
 
