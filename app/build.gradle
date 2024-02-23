@@ -1,0 +1,45 @@
+plugins {
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    // https://bintray.com/bintray/jcenter/com.google.zxing%3Acore
+    implementation 'com.google.zxing:core:3.5.3'
+
+    // https://bintray.com/bintray/jcenter/com.google.zxing%3Ajavase
+    implementation 'com.google.zxing:javase:3.5.3'
+
+    // importando arquivo JAR que está dentro do diretório libs
+    implementation files('libs/barcode.jar')
+
+
+    // Use JUnit Jupiter for testing.
+    testImplementation libs.junit.jupiter
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    // This dependency is used by the application.
+    implementation libs.guava
+}
+
+// Apply a specific Java toolchain to ease working on different environments.
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+// Definindo o fluxo de entrada padrão quando o projeto for executado
+run{
+ standardInput = System.in
+}
+
+application{
+	// informar o nome do pacote e classe Java que tem o método main
+	mainClass = 'poo.Principal'
+}

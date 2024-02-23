@@ -9,11 +9,10 @@ import com.google.zxing.qrcode.QRCodeWriter;
 
 import java.io.IOException;
 import java.nio.file.FileSystems;
-import java.nio.file.Files;
 import java.nio.file.Path;
 
 /**
- * Emerson Ribeiro de Mello - http://docente.ifsc.edu.br/mello
+ * 2024 Emerson Ribeiro de Mello - https://emersonmello.me
  */
 public class Principal {
 
