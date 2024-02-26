@@ -264,4 +264,4 @@ gradle-app.setting
 
 
 # Não ignore os arquivos JAR contidos dentro do diretório lib
-!libs/*.jar
+!**/libs/*.jar
