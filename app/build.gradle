@@ -41,5 +41,5 @@ run{
 
 application{
 	// informar o nome do pacote e classe Java que tem o método main
-	mainClass = 'poo.Principal'
+	mainClass = 'poo.App'
 }
