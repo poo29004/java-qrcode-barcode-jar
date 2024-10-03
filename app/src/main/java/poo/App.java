@@ -8,13 +8,13 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 
 import java.io.IOException;
-import java.nio.file.FileSystems;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * 2024 Emerson Ribeiro de Mello - https://emersonmello.me
  */
-public class Principal {
+public class App {
 
     /**
      * Gera um imagem PNG com um código de barras ou com um QRCode
@@ -38,7 +38,7 @@ public class Principal {
                     CodigoDeBarra.gerarCodigoDeBarra(valorInt, nomeDoArquivo);
                     return true;
                 case "qrcode":
-                    Path filePath = FileSystems.getDefault().getPath(nomeDoArquivo);
+                    Path filePath = Paths.get(nomeDoArquivo);
                     QRCodeWriter qrCodeWriter = new QRCodeWriter();
                     BitMatrix bitMatrix = qrCodeWriter.encode(valor, BarcodeFormat.QR_CODE, 300, 300);
                     MatrixToImageWriter.writeToPath(bitMatrix, "PNG", filePath);
@@ -60,12 +60,12 @@ public class Principal {
         System.err.println("Sintaxe errada! É necessário fornecer os seguintes parâmetros\n");
         System.err.println("(barcode | qrcode) (numero | 'string') nome-do-arquivo.png\n");
         System.err.println("Exemplo para gerar um código de barra: barcode 123456 codigo.png\n");
-        System.err.println("Exemplo para gerar um QRCode: qrcode 'http://ifsc.edu.br' imagem.png\n");
+        System.err.println("Exemplo para gerar um QRCode: qrcode 'https://www.ifsc.edu.br' imagem.png\n");
         System.exit(1);
     }
 
     public static void main(String[] args) {
-        Principal p = new Principal();
+        App p = new App();
 
         if (args.length != 3) {
             p.sintaxeErrada();
